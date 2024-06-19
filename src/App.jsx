@@ -1,14 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { ThemeProvider } from '@emotion/react'
+import darkTheme from './theme/darktheme'
+import NavBar from './components/NavBar'
+import Home from './components/Home'
 
-const  App = () => {
+const App = () => {
   return (
-    <h1 className="text-3xl font-bold underline bg-slate-400">
-      Hello world!
-    </h1>
-  )
+    // ThemeProvider applies the custom theme to all child components within its scope
+    <ThemeProvider theme={darkTheme}>
+
+      <NavBar />
+      <Home />
+
+    </ThemeProvider>
+  );
 }
 
 export default App
