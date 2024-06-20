@@ -3,7 +3,7 @@ import SideBar from './SideBar'
 
 const Home = () => {
   return (
-    <div className='flex gap-8 bg-gray-100'>
+    <div className='flex gap-8'>
         <div className='left-side-part'>
             <SideBar />
         </div>

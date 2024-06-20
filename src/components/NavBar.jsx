@@ -6,7 +6,7 @@ const NavBar = () => {
         <div className="z-10 sticky left-0 right-0 top-0 py-3 px-5 lg:px-10 flex justify-between items-center bg-gray-800 box-border">
             
             <div className="flex items-center justify-center gap-3">
-                <Avatar src="src\assets\TaskHubWithoutName.jpg"  sx={{width: "3rem", height: "3rem"}} ></Avatar>
+                <Avatar src="src\assets\images\TaskHubWithoutName.jpg"  sx={{width: "3rem", height: "3rem"}} ></Avatar>
                 <p className="font-bold text-4xl text-custom-blue">TaskHub</p>
             </div>
 

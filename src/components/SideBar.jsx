@@ -1,31 +1,41 @@
-import React from "react";
-import { Avatar } from "@mui/material";
+import React, { useState } from "react";
+import { Avatar} from "@mui/material";
+import "../assets/css/SideBar.css";
 
 const menu=[
     {name: "Home", value: "Home", role: ["ROLE_ADMIN", "ROLE_CUSTOMER"]},
-    {name: "Done", value: "DONE", role: ["ROLE_ADMIN", "ROLE_CUSTOMER"]},
-    {name: "Asigned", value: "ASSIGNED", role: ["ROLE_ADMIN"]},
-    {name: "Not Assigned", value: "NOT ASSIGNED", role: ["ROLE_ADMIN"]},
-    {name: "Create New Task", value: "", role: ["ROLE_ADMIN"]},
-    {name: "Notification", value: "Notification", role: ["ROLE_CUSTOMER"]}
+    {name: "Completed Tasks", value: "DONE", role: ["ROLE_ADMIN", "ROLE_CUSTOMER"]},
+    {name: "Assigned Tasks", value: "ASSIGNED", role: ["ROLE_ADMIN"]},
+    {name: "Pending Tasks", value: "NOT ASSIGNED", role: ["ROLE_ADMIN"]},
+    {name: "Craft New Task", value: "", role: ["ROLE_ADMIN"]},
+    {name: "Notifications", value: "Notification", role: ["ROLE_CUSTOMER"]}
 ]; 
 
 const role = "ROLE_ADMIN";
 
 const SideBar = () => {
+
+    const [activeMenu, setActiveMenu] = useState("Home");
+
+    const handleMenuChange = (item) => {
+        setActiveMenu(item.name);
+    };
+
     return(
-        <div className="min-h-[85vh] flex flex-col items-center fixed w-[20vw] border-2 border-black ">
-            <div className="space-y-5 h-full">
-                <div className="flex justify-center">
+        <div className="min-h-[85vh] flex flex-col justify-center items-center fixed w-[20vw] border-2 border-black ">
+            <div className="bg-gray-100 space-y-5 h-full rounded-tr-lg rounded-br-lg">
+                <div className="flex justify-center items-center">
                     {/* <Avatar src="src\assets\TaskHub.jpg"  sx={{width: "8rem", height: "8rem"}} className= "w-4 h-4 p-1 border-4 border-custom-blue" ></Avatar> */}
                 </div>
                 {
                     menu.filter((item) => item.role.includes(role))
-                    .map((item) => <p className="">
+                    .map((item) => <p key = {item.name} onClick = {() => handleMenuChange(item)} className={`py-3 px-5 rounded-full text-center cursor-pointer ${activeMenu===item.name?"activeMenuItem":"menuItem"}`}>
                         {item.name}
                     </p>)
                 }
-
+                <button className="logOutButton w-full py-3 px-5 rounded-full text-center cursor-pointer">
+                    Log Out
+                </button>
             </div>
         </div>
     )
