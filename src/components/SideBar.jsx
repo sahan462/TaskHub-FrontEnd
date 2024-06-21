@@ -21,9 +21,13 @@ const SideBar = () => {
         setActiveMenu(item.name);
     };
 
+    const handleLogOut = () => {
+
+    };
+
     return(
-        <div className="min-h-[85vh] flex flex-col justify-center items-center fixed w-[20vw] border-2 border-black ">
-            <div className="bg-gray-100 space-y-5 h-full rounded-tr-lg rounded-br-lg">
+        <div className="min-h-[85vh] flex flex-col justify-center items-center ">
+            <div className="space-y-5 h-full">
                 <div className="flex justify-center items-center">
                     {/* <Avatar src="src\assets\TaskHub.jpg"  sx={{width: "8rem", height: "8rem"}} className= "w-4 h-4 p-1 border-4 border-custom-blue" ></Avatar> */}
                 </div>
@@ -33,7 +37,7 @@ const SideBar = () => {
                         {item.name}
                     </p>)
                 }
-                <button className="logOutButton w-full py-3 px-5 rounded-full text-center cursor-pointer">
+                <button onClick = {handleLogOut} className="logOutButton w-full py-3 px-5 rounded-full text-center cursor-pointer">
                     Log Out
                 </button>
             </div>

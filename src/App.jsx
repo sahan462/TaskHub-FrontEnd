@@ -3,6 +3,7 @@ import { ThemeProvider } from '@emotion/react'
 import darkTheme from './theme/darktheme'
 import NavBar from './components/NavBar'
 import Home from './components/Home'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
 
       <NavBar />
       <Home />
+      <Footer />
 
     </ThemeProvider>
   );
