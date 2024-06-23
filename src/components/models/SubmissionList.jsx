@@ -16,7 +16,7 @@ const style = {
   color: '#fff'
 };
 
-const UserList = ({ open, handleClose }) => {
+const SubmissionList = ({ open, handleClose }) => {
   return (
     <div>
       <Modal
@@ -27,7 +27,7 @@ const UserList = ({ open, handleClose }) => {
       >
         <Box sx={style} className='bg-gray-800 rounded'>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Submission List
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
@@ -38,4 +38,4 @@ const UserList = ({ open, handleClose }) => {
   );
 }
 
-export default UserList;
+export default SubmissionList;

@@ -3,7 +3,9 @@ import '../assets/css/TaskCard.css';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Menu, MenuItem, IconButton } from '@mui/material';
 import { useState } from 'react';
-import UserList from './UserList';
+import UserList from './models/UserList';
+import SubmissionList from './models/SubmissionList';
+import EditTask from './models/EditTask';
 
 function TaskCard() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,6 +22,8 @@ function TaskCard() {
   const role = "ROLE_ADMIN";
 
   const [openUserList, setOpenUserList] = useState(false);
+  const [openSubmissionList, setOpenSubmissionList] = useState(false);
+  const [openEditTask, setOpenEditTask] = useState(false);
 
   const handleOpenUserList = () => {
     setOpenUserList(true);
@@ -31,13 +35,21 @@ function TaskCard() {
   };
 
   const handleOpenSubmissionList = () => {
-
-
+    setOpenSubmissionList(true);
   };
 
-  const handleOpenTaskModel = () => {
+  const handleCloseSubmissionList = () => {
+    setOpenSubmissionList(false);
+    handleClose();
+  };
 
+  const handleOpenEditTaskModel = () => {
+    setOpenEditTask(true);
+  };
 
+  const handleCloseEditTaskModel = () => {
+    setOpenEditTask(false);
+    handleClose();
   };
 
   const handleDeleteTask = () => {
@@ -85,7 +97,7 @@ function TaskCard() {
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                 <MenuItem onClick={handleOpenUserList}>Assigned User</MenuItem>
                 <MenuItem onClick={handleOpenSubmissionList}>See Submissions</MenuItem>
-                <MenuItem onClick={handleOpenTaskModel}>Edit</MenuItem>
+                <MenuItem onClick={handleOpenEditTaskModel}>Edit</MenuItem>
                 <MenuItem onClick={handleDeleteTask}>Delete</MenuItem>
             </Menu>
         ) : (
@@ -98,6 +110,8 @@ function TaskCard() {
         }
 
         <UserList open={openUserList} handleClose={handleCloseUserList}/>
+        <SubmissionList open={openSubmissionList} handleClose={handleCloseSubmissionList}/>
+        <EditTask open={openEditTask} handleClose={handleCloseEditTaskModel} />
 
       </div>
     </div>
