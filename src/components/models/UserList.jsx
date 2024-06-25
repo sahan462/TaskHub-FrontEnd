@@ -19,7 +19,7 @@ const style = {
   color: '#fff'
 };
 
-const userList = [1];
+const userList = [1,1,1,1];
 
 const UserList = ({ open, handleClose }) => {
   return (
