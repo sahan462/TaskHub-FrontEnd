@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Avatar} from "@mui/material";
 import "../assets/css/SideBar.css";
+import CreateTask from "./createTask";
 
 const menu=[
     {name: "Home", value: "Home", role: ["ROLE_ADMIN", "ROLE_CUSTOMER"]},
@@ -18,6 +18,11 @@ const SideBar = () => {
     const [activeMenu, setActiveMenu] = useState("Home");
 
     const handleMenuChange = (item) => {
+
+        if(item.name === "Craft New Task") {
+            <CreateTask open={true} handleClose={false} />
+        } 
+
         setActiveMenu(item.name);
     };
 
@@ -41,6 +46,9 @@ const SideBar = () => {
                     Log Out
                 </button>
             </div>
+
+            
+
         </div>
     )
 }

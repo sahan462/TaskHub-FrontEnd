@@ -2,9 +2,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Button, Divider } from '@mui/material';
+import { Button, Divider, IconButton } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import '../../assets/css/Modal.css';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
   position: 'absolute',
@@ -22,6 +23,12 @@ const style = {
 const submissionList = [1,1,1,1,1]; 
 
 const SubmissionList = ({ open, handleClose }) => {
+
+  const handleAcceptDecline = (item) => {
+    console.log(item);
+  }
+
+
   return (
     <div>
       <Modal
@@ -62,9 +69,27 @@ const SubmissionList = ({ open, handleClose }) => {
                             </a>
                           </div>
                         </div>
-                        <p >Submission Time :</p>
+                        <div className='flex gap-2'>
+                          <p >Submission Time :</p>
+                          <p>time</p>
+                        </div>
                       </div>
-                      <Button className='customButton'>Select</Button>
+                      <div>
+                        {
+                          true?<div>
+                            <div >
+                              <IconButton color='success' onClick={() => handleAcceptDecline("ACCEPTED")}>
+                                <CheckIcon />
+                              </IconButton>
+                              <IconButton color='error' onClick={() => handleAcceptDecline("DECLINED")}>
+                                <CloseIcon />
+                              </IconButton>
+                            </div>
+                          </div>:<div>
+                            <Button className='customButton'>Select</Button>
+                          </div>
+                        }
+                      </div>
                     </div>
                     <Divider />
                   </React.Fragment>
