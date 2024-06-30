@@ -46,6 +46,7 @@ const SideBar = () => {
                     Log Out
                 </button>
             </div>
+            <CreateTask open={true} handleClose={false} />
 
             
 
