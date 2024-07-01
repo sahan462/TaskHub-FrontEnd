@@ -20,7 +20,6 @@ const SideBar = () => {
     const handleMenuChange = (item) => {
 
         if(item.name === "Craft New Task") {
-            <CreateTask open={true} handleClose={false} />
         } 
 
         setActiveMenu(item.name);
