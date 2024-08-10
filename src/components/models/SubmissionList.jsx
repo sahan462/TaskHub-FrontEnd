@@ -14,20 +14,20 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 500,
   bgcolor: '#121212',
-  border: '2px solid #000',
+  border: 'none',
   boxShadow: 24,
-  p: 4,
-  color: '#fff'
+  p: 3,
+  borderRadius: '10px',
+  color: '#e5e7eb'
 };
 
-const submissionList = [1,1,1,1,1]; 
+const submissionList = [1, 1, 1, 1, 1]; 
 
 const SubmissionList = ({ open, handleClose }) => {
 
-  const handleAcceptDecline = (item) => {
-    console.log(item);
+  const handleAcceptDecline = (status) => {
+    console.log(status);
   }
-
 
   return (
     <div>
@@ -37,15 +37,16 @@ const SubmissionList = ({ open, handleClose }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} className='bg-gray-800 rounded max-h-[500px]'>
+        <Box sx={style}>
           <Typography 
             id="modal-modal-title" 
             variant="h6" 
             component="h2" 
             sx={{
-              borderBottom: '2px solid #fff',
+              borderBottom: '2px solid #4b5563',
               pb: 1,
-              mb: 1
+              mb: 2,
+              fontFamily: 'Poppins, sans-serif'
             }}
           >
             Submission List
@@ -54,44 +55,48 @@ const SubmissionList = ({ open, handleClose }) => {
           <div className="overflow-y-scroll custom-scrollbar max-h-[400px]">
             {
               submissionList.length === 0 ?
-                <div>No Submissions Found</div>
+                <div className="text-center text-gray-400">
+                  No Submissions Found
+                </div>
                 :
                 submissionList.map((item, index) => (
                   <React.Fragment key={index}>
-                    <div className='flex items-center justify-between w-full pr-3 pb-3 pt-3'>
+                    <div className='flex items-center justify-between w-full py-3'>
                       <div className='flex flex-col'> 
-                        <div className='flex items-center justify-center gap-2'>
+                        <div className='flex items-center gap-2 text-sm text-gray-300'>
                           GitHub :
-                          <div className='text-custom-blue flex items-center justify-center gap-2'>
-                            <OpenInNewIcon />
-                            <a href="/" target="_blank" rel="noopener noreferrer">
+                          <div className='text-blue-400 flex items-center gap-2'>
+                            <OpenInNewIcon fontSize="small" />
+                            <a href="/" target="_blank" rel="noopener noreferrer" className="underline">
                               Go To Link
                             </a>
                           </div>
                         </div>
-                        <div className='flex gap-2'>
-                          <p >Submission Time :</p>
+                        <div className='flex gap-2 text-sm text-gray-400 mt-1'>
+                          <p>Submission Time :</p>
                           <p>time</p>
                         </div>
                       </div>
                       <div>
-                        {
-                          true?<div>
-                            <div >
-                              <IconButton color='success' onClick={() => handleAcceptDecline("ACCEPTED")}>
-                                <CheckIcon />
-                              </IconButton>
-                              <IconButton color='error' onClick={() => handleAcceptDecline("DECLINED")}>
-                                <CloseIcon />
-                              </IconButton>
-                            </div>
-                          </div>:<div>
-                            <Button className='customButton'>Select</Button>
-                          </div>
-                        }
+                        <div>
+                          <IconButton 
+                            color='success' 
+                            onClick={() => handleAcceptDecline("ACCEPTED")}
+                            sx={{ color: '#34d399' }}
+                          >
+                            <CheckIcon />
+                          </IconButton>
+                          <IconButton 
+                            color='error' 
+                            onClick={() => handleAcceptDecline("DECLINED")}
+                            sx={{ color: '#f87171' }}
+                          >
+                            <CloseIcon />
+                          </IconButton>
+                        </div>
                       </div>
                     </div>
-                    <Divider />
+                    <Divider sx={{ borderColor: '#374151' }} />
                   </React.Fragment>
                 ))
             }

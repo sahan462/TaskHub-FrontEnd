@@ -1,20 +1,27 @@
 import './App.css'
-import { ThemeProvider } from '@emotion/react'
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles"
+import { Container, CssBaseline } from "@mui/material";
 import darkTheme from './theme/darktheme'
-import NavBar from './components/NavBar'
-import Home from './components/Home'
-import Footer from './components/Footer'
+import { Layout } from './Layout'
+import {Home} from './components/Home'
+import {UserProfile} from './components/UserProfile';
 
 const App = () => {
   return (
     // ThemeProvider applies the custom theme to all child components within its scope
-    <ThemeProvider theme={darkTheme}>
-
-      <NavBar />
-      <Home />
-      <Footer />
-
-    </ThemeProvider>
+    <div className="App">
+      <ThemeProvider theme={darkTheme}>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<UserProfile />} />
+                </Route>
+            </Routes>
+        </Router>
+      </ThemeProvider>
+    </div>
   );
 }
 
