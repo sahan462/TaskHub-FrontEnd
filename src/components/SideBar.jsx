@@ -16,10 +16,12 @@ const role = "ROLE_ADMIN";
 const SideBar = () => {
 
     const [activeMenu, setActiveMenu] = useState("Home");
+    const [openCreateTask, setOpenCreateTask] = useState(false);
 
     const handleMenuChange = (item) => {
         if (item.name === "Craft New Task") {
             // Handle new task creation logic here
+            handleOpenCreateTaskModal();
         }
         setActiveMenu(item.name);
     };
@@ -27,6 +29,14 @@ const SideBar = () => {
     const handleLogOut = () => {
         // Handle logout logic here
     };
+
+    const handleOpenCreateTaskModal = () => {
+        setOpenCreateTask(true);
+    }
+
+    const handleCloseCreateTaskModal = () => {
+        setOpenCreateTask(false);
+    }
 
     return (
         <div className="min-h-[85vh] flex flex-col justify-center items-center bg-gray-100 py-5">
@@ -49,7 +59,7 @@ const SideBar = () => {
                     Log Out
                 </button>
             </div>
-            {/* <CreateTask open={true} handleClose={false} /> */}
+            <CreateTask open={openCreateTask} handleClose={handleCloseCreateTaskModal} />
         </div>
     )
 }

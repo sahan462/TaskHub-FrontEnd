@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,6 +16,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import CreateTask from '../createTask';
 
 const drawerWidth = 240;
 
@@ -64,6 +66,31 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export const DrawerLeft = ({open, handleDrawerClose}) => {
   const theme = useTheme();
+  
+  const [activeMenu, setActiveMenu] = useState("Home");
+  const [openCreateTask, setOpenCreateTask] = useState(false);
+
+  const handleMenuChange = (item) => {
+      if (item === "Create New Task") {
+          // Handle new task creation logic here
+          handleOpenCreateTaskModal();
+      }else{
+        console.log("Not rendered properly");
+      }
+      setActiveMenu(item.name);
+  };
+
+  const handleLogOut = () => {
+      // Handle logout logic here
+  };
+
+  const handleOpenCreateTaskModal = () => {
+      setOpenCreateTask(true);
+  }
+
+  const handleCloseCreateTaskModal = () => {
+      setOpenCreateTask(false);
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -91,7 +118,7 @@ export const DrawerLeft = ({open, handleDrawerClose}) => {
         <List>
           {['Home', 'Completed Tasks', 'Assigned Tasks', 'Pending Tasks'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={() => handleMenuChange(text)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -102,9 +129,9 @@ export const DrawerLeft = ({open, handleDrawerClose}) => {
         </List>
         <Divider />
         <List>
-          {['New Task', 'Trash', 'Spam'].map((text, index) => (
+          {['Create New Task'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={() => handleMenuChange(text)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -114,6 +141,9 @@ export const DrawerLeft = ({open, handleDrawerClose}) => {
           ))}
         </List>
       </Drawer>
+
+      <CreateTask open={openCreateTask} handleClose={handleCloseCreateTaskModal} />
+
     </Box>
   );
 }
