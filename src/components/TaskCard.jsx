@@ -6,6 +6,7 @@ import UserList from './models/UserList';
 import SubmissionList from './models/SubmissionList';
 import EditTask from './models/EditTask';
 import { DeleteConfirmDialog } from './models/DeleteConfirmDialog';
+import keycloakInstance from '../keycloak/keycloak';
 
 function TaskCard({ task, role }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -68,9 +69,9 @@ function TaskCard({ task, role }) {
     handleCloseDeleteConfirm();
   };
 
-  const menuItems = role === "ROLE_ADMIN" 
+  const menuItems = keycloakInstance.getRoles().includes("admin") 
     ? [
-        { label: "Assigned User", action: () => handleOpenUserList("userList") },
+        { label: "Assign User", action: () => handleOpenUserList("userList") },
         { label: "See Submissions", action: () => handleOpenSubmissionList("submissionList") },
         { label: "Edit", action: () => handleOpenEditTaskModel("editTask") },
         { label: "Delete", action: () => handleOpenDeleteConfirm("deleteConfirm") },

@@ -49,7 +49,7 @@ export const TaskList = () => {
   return (
     <div className='w-full flex flex-wrap justify-between gap-2'>
         {
-            taskList.map((task, index) => <TaskCard task={task} role={task.role}/>)
+            taskList.map((task, index) => <TaskCard task={task} key={index} role={task.role}/>)
         }
     </div>
  )

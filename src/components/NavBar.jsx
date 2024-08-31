@@ -17,6 +17,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { Box, Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { DrawerLeft } from './models/DrawerLeft';
+import keycloakInstance from '../keycloak/keycloak.js';
 
 // Styling for the search bar component
 const Search = styled('div')(({ theme }) => ({
@@ -129,6 +130,25 @@ export const NavBar = () => {
     >
       <MenuItem onClick={goToProfile}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem >
+      {!keycloakInstance.getInstance().authenticated && (
+        <button
+          type="button"
+          onClick={() => keycloakInstance.getInstance().login()}
+        >
+          Login
+        </button>
+      )}
+
+      {!!keycloakInstance.getInstance().authenticated && (
+        <button
+          type="button"
+          onClick={() => keycloakInstance.getInstance().logout()}
+        >
+          Logout ({keycloakInstance.getInstance().tokenParsed.preferred_username})
+        </button>
+      )}
+      </MenuItem>
     </Menu>
   );
 
