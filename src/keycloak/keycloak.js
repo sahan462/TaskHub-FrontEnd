@@ -3,10 +3,9 @@ import Keycloak from "keycloak-js";
 class KeycloakInstance {
   constructor() {
     this.keycloak = new Keycloak({
-      url: "http://localhost:8086/",
+      url: "http://localhost:8087/",
       realm: "MyRealm",
       clientId: "TaskHub",
-      clientSecret: "jDf1SJfhQAYhtuqfvNGqonFeuZxEEhGr"
     });
     this.initialized = false;
     this.roles = [];
