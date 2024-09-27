@@ -60,6 +60,7 @@ const CreateTask = ({ open, handleClose }) => {
         e.preventDefault();
         const {deadline} = formData;
         console.log(formData);
+        handleClose();
     };
 
     return (
@@ -84,7 +85,7 @@ const CreateTask = ({ open, handleClose }) => {
                     Create New Task
                 </Typography>
                 <form>
-                    <Box>
+                    <Box mb={2}>
                         <TextField
                             label="Title"
                             fullWidth
@@ -93,7 +94,7 @@ const CreateTask = ({ open, handleClose }) => {
                             onChange={handleChange}
                         />
                     </Box>
-                    <Box>
+                    <Box mb={2}>
                         <TextField
                             label="Description"
                             fullWidth
@@ -103,7 +104,7 @@ const CreateTask = ({ open, handleClose }) => {
                             onChange={handleChange}
                         />
                     </Box>
-                    <Box>
+                    <Box mb={2}>
                         <Autocomplete 
                             multiple
                             id="multiple-limit-tags"
@@ -119,7 +120,7 @@ const CreateTask = ({ open, handleClose }) => {
                             }
                         />
                     </Box>    
-                    <Box>
+                    <Box mb={2}>
                         <TextField
                             label="Image"
                             fullWidth
