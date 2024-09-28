@@ -14,7 +14,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 500,
     bgcolor: '#121212',
     border: '2px solid #000',
     boxShadow: 24,
@@ -59,10 +59,29 @@ const CreateTask = ({ open, handleClose }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const {deadline} = formData;
+        formData.deadline = formatDate(deadline);
+        formData.tags = selectedTags;
         console.log(formData);
         handleClose();
     };
 
+    const formatDate = (input) => {
+        let {
+          $y: year,
+          $M: month,
+          $D: day,
+          $H: hours,
+          $m: minutes,
+          $s: seconds,
+          $ms: milliseconds,
+        } = input;
+
+        const date = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+        const formattedDate = date.toISOString();
+        
+        return formattedDate;
+    }
+      
     return (
         <div>
             <Modal
@@ -129,7 +148,7 @@ const CreateTask = ({ open, handleClose }) => {
                             onChange={handleChange}
                         />
                     </Box>
-                    <Box>
+                    <Box mb={2}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker']}>
                                 <DatePicker 
@@ -142,7 +161,20 @@ const CreateTask = ({ open, handleClose }) => {
                         </LocalizationProvider>
                     </Box>
                     <Box>
-                        <Button type='submit ' fullWidth typeclassName="customButton" onClick={handleSubmit}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            className="customButton"
+                            onClick={handleSubmit}
+                            variant="contained"
+                            sx={{
+                                backgroundColor: 'primary.main',
+                                color: 'white',
+                                '&:hover': {
+                                    backgroundColor: 'primary.dark',
+                                },
+                            }}
+                        >
                             Create
                         </Button>
                     </Box>
