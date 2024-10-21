@@ -8,6 +8,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {Button} from '@mui/material';
+import axios from 'axios';
+import keycloakInstance from '../keycloak/keycloak.js';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 const style = {
     position: 'absolute',
@@ -56,14 +62,57 @@ const CreateTask = ({ open, handleClose }) => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const {deadline} = formData;
+        const { deadline } = formData;
         formData.deadline = formatDate(deadline);
         formData.tags = selectedTags;
-        console.log(formData);
+        const token = keycloakInstance.getToken();
+        console.log("Token: " + token);
+
+        const testData = {
+            "title": "Implement JWT Authentication",
+            "description": "Create JWT authentication for the REST API endpoints",
+            "image": "https://example.com/images/jwt-auth.png",
+            "assignedUserId": 1,
+            "tags": ["authentication", "security", "backend"],
+            "status": "PENDING",
+            "createdAt": "2023-06-10T10:15:30",
+            "deadline": "2023-06-15T23:59:59"
+          }
+
+        try {
+            const response = await axios.post(
+                "http://localhost:5002/api/tasks", 
+                formData, 
+                {
+                  headers: {
+                    'Authorization': `Bearer ${token}`, 
+                  },
+                }
+              );      
+            console.log(response);
+            if (response.status === 200 || response.status === 201) {
+                MySwal.fire({
+                title: 'Success!',
+                text: 'Task has been created successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+                });
+            }
+            } catch (error) {
+            console.log(error);
+            MySwal.fire({
+                title: 'Error!',
+                text: 'There was an issue creating the task. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
         handleClose();
-    };
+        console.log(formData);
+      };
+    
 
     const formatDate = (input) => {
         let {

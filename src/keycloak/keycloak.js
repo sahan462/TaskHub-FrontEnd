@@ -36,7 +36,11 @@ class KeycloakInstance {
   isAuthenticated() {
     return this.keycloak.authenticated !== undefined;
   }
-  
+
+  getToken()
+  {
+    return this.keycloak.token;
+  }  
   // Function to get user roles
   getUserRoles() {
     if (this.keycloak && this.keycloak.tokenParsed) {

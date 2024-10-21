@@ -77,8 +77,7 @@ function TaskCard({ task, role }) {
         { label: "Delete", action: () => handleOpenDeleteConfirm("deleteConfirm") },
       ]
     : [
-        { label: "Edit", action: handleCloseMenu },
-        { label: "Delete", action: handleCloseMenu },
+        { label: "Submit Task", action: handleCloseMenu },
       ];
 
   return (
@@ -134,9 +133,9 @@ function TaskCard({ task, role }) {
           ))}
         </Menu>
 
-        <UserList open={openUserList} handleClose={handleCloseUserList} />
-        <SubmissionList open={openSubmissionList} handleClose={handleCloseSubmissionList} />
-        <EditTask open={openEditTask} handleClose={handleCloseEditTaskModel} />
+        <UserList open={openUserList} handleClose={handleCloseUserList} task={task.id} />
+        <SubmissionList open={openSubmissionList} handleClose={handleCloseSubmissionList} taskId={task.id} />
+        <EditTask open={openEditTask} handleClose={handleCloseEditTaskModel} taskId={task.id} />
 
       </Card>
     </motion.div>
